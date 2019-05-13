@@ -5,8 +5,8 @@ import com.example.chaindemo.exception.UserNotExistException;
 import com.example.chaindemo.handler.AuthenticationFailureHandler;
 import com.example.chaindemo.handler.AuthenticationSuccessHandler;
 import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.LoginVo;
 import com.example.chaindemo.pojo.ServletHeader;
+import com.example.chaindemo.pojo.UserDetail;
 import com.example.chaindemo.provider.sms.SmsRegisterProvider;
 import com.example.chaindemo.provider.validator.LoginRequestValidator;
 import com.example.chaindemo.provider.validator.RechargeValidator;
@@ -66,7 +66,7 @@ public class ProviderManager {
      * @param header
      * @return
      */
-    public LoginVo authenticate(LoginRequest request, ServletHeader header) {
+    public UserDetail authenticate(LoginRequest request, ServletHeader header) {
         try {
             // 登录请求参数校验
             loginRequestValidator.isValid(request);
@@ -91,7 +91,7 @@ public class ProviderManager {
             }
 
             // 读取用户信息
-            LoginVo authenticate = providerHolder.find(request.getLoginType()).authenticate(request);
+            UserDetail authenticate = providerHolder.find(request.getLoginType()).authenticate(request);
 
             // 记录用户登录行为
             log.info(">>> 记录用户登录行为。。。。。。");
@@ -101,7 +101,7 @@ public class ProviderManager {
         } catch (UserNotExistException e) {
             if (3 == request.getLoginType()) {
                 // 当未找到用户时，用户的登录类型为手机号登陆，则进行新用户注册流程
-                LoginVo register = smsRegisterProvider.register(request);
+                UserDetail register = smsRegisterProvider.register(request);
                 // 记录用户注册行为
                 log.info(">>> 记录用户注册行为。。。。。。");
                 return register;

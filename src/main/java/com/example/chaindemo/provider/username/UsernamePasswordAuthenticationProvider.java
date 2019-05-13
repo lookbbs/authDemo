@@ -1,8 +1,8 @@
 package com.example.chaindemo.provider.username;
 
-import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.LoginVo;
 import com.example.chaindemo.exception.UserNotExistException;
+import com.example.chaindemo.pojo.LoginRequest;
+import com.example.chaindemo.pojo.UserDetail;
 import com.example.chaindemo.provider.AuthenticationProvider;
 import com.example.chaindemo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,12 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
     private UserService userService;
 
     @Override
-    public LoginVo authenticate(LoginRequest request) {
+    public UserDetail authenticate(LoginRequest request) {
         log.info(">>> 用户名密码登录开始。。。。。");
         // 用户名密码登录错误次数检查确认
         checkImageCode(request);
         log.info(">>> 用户名密码登录错误次数检查确认 通过");
-        LoginVo user = userService.getByUsername(request.getUserName());
+        UserDetail user = userService.getByUsername(request.getUserName());
         if (user == null) {
             throw new UserNotExistException("用户不存在");
         }
@@ -46,6 +46,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
 
     /**
      * 校验图片验证码
+     *
      * @param request
      */
     private void checkImageCode(LoginRequest request) {
@@ -66,6 +67,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
 
     /**
      * 密码校验失败处理
+     *
      * @param request
      */
     private void passwordCheckFailureProcessor(LoginRequest request) {

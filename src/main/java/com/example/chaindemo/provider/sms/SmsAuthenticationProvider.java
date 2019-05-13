@@ -1,7 +1,8 @@
 package com.example.chaindemo.provider.sms;
 
 import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.LoginVo;
+import com.example.chaindemo.pojo.UserDetail;
+import com.example.chaindemo.pojo.UserDetails;
 import com.example.chaindemo.provider.AuthenticationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,15 +19,15 @@ public class SmsAuthenticationProvider implements AuthenticationProvider {
 
 
     @Override
-    public LoginVo authenticate(LoginRequest request) {
+    public UserDetail authenticate(LoginRequest request) {
         log.info(">>> 手机号验证码登录。。。。。");
         // 手机号登陆身份验证
-        LoginVo vo = login(request);
+        UserDetail vo = login(request);
 
         return vo;
     }
 
-    private LoginVo login(LoginRequest request) {
+    private UserDetail login(LoginRequest request) {
         log.info(">>> 手机号【{}】登陆", request.getUserName());
         //判断用户账号是否被禁用
 

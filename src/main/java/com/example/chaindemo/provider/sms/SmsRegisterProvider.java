@@ -1,7 +1,7 @@
 package com.example.chaindemo.provider.sms;
 
 import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.LoginVo;
+import com.example.chaindemo.pojo.UserDetail;
 import com.example.chaindemo.provider.validator.white.DeviceWhiteValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 手机号短信注册服务
+ *
  * @author yuandongfei
  * @date 2019/4/11
  */
@@ -19,12 +20,12 @@ public class SmsRegisterProvider {
     @Autowired
     private DeviceWhiteValidator deviceWhiteValidator;
 
-    public LoginVo register(LoginRequest request) {
+    public UserDetail register(LoginRequest request) {
         log.info(">>> 根据手机号：{}自动注册账号", request.getUserName());
         // 模拟器注册拦截(模拟器环境不允许注册)
         // 设备白名单判断
         boolean permitted = deviceWhiteValidator.isPermitted(request.getDeviceNo(), Boolean.FALSE);
-        if(!permitted){
+        if (!permitted) {
             //判断同一个游戏同一个设备下注册账号次数[防刷-注册]
             //ios不需要做该限制
             //判断该设备下24小时内注册的账号次数[防刷-注册]

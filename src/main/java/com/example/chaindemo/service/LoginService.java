@@ -1,7 +1,7 @@
 package com.example.chaindemo.service;
 
 import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.LoginVo;
+import com.example.chaindemo.pojo.UserDetails;
 import com.example.chaindemo.pojo.ServletHeader;
 
 /**
@@ -10,5 +10,5 @@ import com.example.chaindemo.pojo.ServletHeader;
  */
 public interface LoginService {
 
-    LoginVo login(LoginRequest request, ServletHeader header);
+    UserDetails login(LoginRequest request, ServletHeader header);
 }

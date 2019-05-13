@@ -1,7 +1,7 @@
 package com.example.chaindemo.provider;
 
 import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.LoginVo;
+import com.example.chaindemo.pojo.UserDetail;
 
 /**
  * @author yuandongfei
@@ -14,7 +14,7 @@ public interface AuthenticationProvider {
      * @param request 登录请求
      * @return
      */
-    LoginVo authenticate(LoginRequest request);
+    UserDetail authenticate(LoginRequest request);
 
 
     /**
