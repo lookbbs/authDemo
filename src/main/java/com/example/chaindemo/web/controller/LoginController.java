@@ -61,7 +61,6 @@ public class LoginController {
 
     public static String getIp2(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
-        System.out.println("getIp2中获取到ip值为:" + ip);
         if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
             //多次反向代理后会有多个ip值，第一个ip才是真实ip
             int index = ip.indexOf(",");
