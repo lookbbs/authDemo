@@ -24,7 +24,7 @@ import java.util.UUID;
  * @date 2019/4/10
  */
 @RestController
-public class SdkLoginController {
+public class LoginController {
 
     @Autowired
     private LoginService loginService;
