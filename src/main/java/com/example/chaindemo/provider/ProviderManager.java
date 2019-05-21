@@ -5,7 +5,6 @@ import com.example.chaindemo.exception.UserNotExistException;
 import com.example.chaindemo.handler.AuthenticationFailureHandler;
 import com.example.chaindemo.handler.AuthenticationSuccessHandler;
 import com.example.chaindemo.pojo.LoginRequest;
-import com.example.chaindemo.pojo.ServletHeader;
 import com.example.chaindemo.pojo.UserDetail;
 import com.example.chaindemo.provider.sms.SmsRegisterProvider;
 import com.example.chaindemo.provider.validator.LoginRequestValidator;
@@ -63,17 +62,16 @@ public class ProviderManager {
      * 登录认证
      *
      * @param request
-     * @param header
      * @return
      */
-    public UserDetail authenticate(LoginRequest request, ServletHeader header) {
+    public UserDetail authenticate(LoginRequest request) {
         try {
             // 登录请求参数校验
             loginRequestValidator.isValid(request);
             // 检验IP白名单
             whiteValidatorHolder.valid(Stream.of(
                     // 检验IP白名单
-                    new IpValidData(header.getIp()),
+                    new IpValidData(request.getLoginIp()),
                     // 检验设备号白名单
                     new DeviceValidData(request.getDeviceNo()),
                     // 检验用户名白名单
@@ -87,7 +85,7 @@ public class ProviderManager {
             boolean checkRecharge = rechargeValidator.isValid(request.getUserName());
             if (!checkRecharge) {
                 // 检验IP黑名单, 校验不通过则抛出ValidatorException异常
-                ipBlackValidator.isValid(header.getIp());
+                ipBlackValidator.isValid(request.getLoginIp());
             }
 
             // 读取用户信息

@@ -2,7 +2,6 @@ package com.example.chaindemo.service;
 
 import com.example.chaindemo.pojo.LoginRequest;
 import com.example.chaindemo.pojo.UserDetails;
-import com.example.chaindemo.pojo.ServletHeader;
 
 /**
  * @author yuandongfei
@@ -10,5 +9,5 @@ import com.example.chaindemo.pojo.ServletHeader;
  */
 public interface LoginService {
 
-    UserDetails login(LoginRequest request, ServletHeader header);
+    UserDetails login(LoginRequest request);
 }

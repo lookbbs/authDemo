@@ -20,6 +20,8 @@ public class LoginRequest extends AbstractRequest {
      * 登陆类型
      */
     private Integer loginType;
+
+    private String loginIp;
     /**
      * 游戏版本号
      */
